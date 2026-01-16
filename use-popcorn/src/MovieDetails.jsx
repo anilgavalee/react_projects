@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { API_KEY } from "./mykey";
+import { StarRating } from "./components/StarRating";
 export function MovieDetails({
   selectedId,
   onCloseMovie,
@@ -11,6 +12,7 @@ export function MovieDetails({
   const [error, setError] = useState("");
   const isWatched = watched.some((mov) => mov.imdbID === selectedId);
   const [userRating, setUserRating] = useState(0);
+  const ref = useRef(null);
   useEffect(() => {
     if (!selectedId) return; // 🔑 CRITICAL GUARD
     const controller = new AbortController();
@@ -40,8 +42,25 @@ export function MovieDetails({
     // return () => console.log("MovieDetails unmounted");
     return () => controller.abort();
   }, [selectedId]);
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        onCloseMovie();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onCloseMovie]);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [selectedId]);
+
   return (
-    <>
+    <div ref={ref}>
       {isLoading && <h1>wait we are getting movie details</h1>}
       {error && <h1>{error}</h1>}
       {!isLoading && !error && movie.Title && (
@@ -70,8 +89,10 @@ export function MovieDetails({
               })}
             </select>
           </div>
+          <StarRating userRating={userRating} setUserRating={setUserRating}></StarRating>
         </>
       )}
+      {isWatched && <p>✅ You already watched this movie</p>}
       {userRating > 0 && !isWatched && (
         <button
           onClick={() =>
@@ -89,6 +110,6 @@ export function MovieDetails({
           + Add to watch
         </button>
       )}
-    </>
+    </div>
   );
 }
