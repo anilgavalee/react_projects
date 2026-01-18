@@ -1,0 +1,27 @@
+{
+  "questions": [
+    {
+      "question": "Which JavaScript framework is most popular?",
+      "options": ["Angular", "React", "Vue", "Svelte"],
+      "correctOption": 1,
+      "points": 10
+    },
+    {
+      "question": "Which hook is used for side effects?",
+      "options": ["useState", "useReducer", "useEffect", "useRef"],
+      "correctOption": 2,
+      "points": 10
+    },
+    {
+      "question": "What does useReducer return?",
+      "options": [
+        "state and function",
+        "state and dispatch",
+        "dispatch only",
+        "reducer only"
+      ],
+      "correctOption": 1,
+      "points": 10
+    }
+  ]
+}
