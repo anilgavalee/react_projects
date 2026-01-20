@@ -1,0 +1,20 @@
+{
+  "cities": [
+    {
+      "id": 1,
+      "cityName": "Lisbon",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2027-10-31",
+      "position": { "lat": 38.7223, "lng": -9.1393 }
+    },
+    {
+      "id": 2,
+      "cityName": "Lison",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "date": "2027-10-31",
+      "position": { "lat": 35.7223, "lng": -9.1393 }
+    }
+  ]
+}
